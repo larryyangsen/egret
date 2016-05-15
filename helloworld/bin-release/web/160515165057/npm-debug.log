@@ -1,0 +1,44 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\Larry\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'remove',
+1 verbose cli   'http-server',
+1 verbose cli   '-g' ]
+2 info using npm@2.11.2
+3 info using node@v5.10.1
+4 verbose unbuild node_modules\http-server
+5 info preuninstall http-server@0.8.0
+6 info uninstall http-server@0.8.0
+7 verbose unbuild rmStuff http-server@0.8.0 from C:\Program Files\nodejs\node_modules
+8 silly gentlyRm C:\Program Files\nodejs\http-server.cmd is being gently removed
+9 silly gentlyRm verifying C:\Program Files\nodejs is an npm working directory
+10 silly gentlyRm C:\Program Files\nodejs\hs.cmd is being gently removed
+11 silly gentlyRm verifying C:\Program Files\nodejs is an npm working directory
+12 silly gentlyRm containing path C:\Program Files\nodejs is under npm's control, in C:\Program Files\nodejs
+13 silly gentlyRm deletion target C:\Program Files\nodejs\http-server.cmd is under C:\Program Files\nodejs
+14 verbose gentlyRm vacuuming from C:\Program Files\nodejs\http-server.cmd up to C:\Program Files\nodejs
+15 silly gentlyRm containing path C:\Program Files\nodejs is under npm's control, in C:\Program Files\nodejs
+16 silly gentlyRm deletion target C:\Program Files\nodejs\hs.cmd is under C:\Program Files\nodejs
+17 verbose gentlyRm vacuuming from C:\Program Files\nodejs\hs.cmd up to C:\Program Files\nodejs
+18 silly vacuum-fs removing C:\Program Files\nodejs\http-server.cmd
+19 silly vacuum-fs removing C:\Program Files\nodejs\hs.cmd
+20 verbose stack Error: EPERM: operation not permitted, unlink 'C:\Program Files\nodejs\http-server.cmd'
+20 verbose stack     at Error (native)
+21 verbose cwd C:\Users\Larry\Documents\egret\helloworld\bin-release\web\160515165057
+22 error Windows_NT 10.0.10586
+23 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\Larry\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "remove" "http-server" "-g"
+24 error node v5.10.1
+25 error npm  v2.11.2
+26 error path C:\Program Files\nodejs\http-server.cmd
+27 error code EPERM
+28 error errno -4048
+29 error syscall unlink
+30 error Error: EPERM: operation not permitted, unlink 'C:\Program Files\nodejs\http-server.cmd'
+30 error     at Error (native)
+30 error  { [Error: EPERM: operation not permitted, unlink 'C:\Program Files\nodejs\http-server.cmd']
+30 error   errno: -4048,
+30 error   code: 'EPERM',
+30 error   syscall: 'unlink',
+30 error   path: 'C:\\Program Files\\nodejs\\http-server.cmd' }
+31 error Please try running this command again as root/Administrator.
+32 verbose exit [ -4048, true ]
