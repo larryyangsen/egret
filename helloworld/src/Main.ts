@@ -116,16 +116,38 @@ class Main extends egret.DisplayObjectContainer {
      * 创建游戏场景
      * Create a game scene
      */
+    private text: egret.TextField;
+    private circle: egret.Shape;
     private createGameScene(): void {
-        var circle: egret.Shape = new egret.Shape;
-        circle.graphics.lineStyle(0, 0xffffff);
-        circle.graphics.beginFill(0x00ff00, 0.7);
-        circle.graphics.drawCircle(200, 200, 100);
-        circle.graphics.lineStyle(0, 0x00ffff);
-        circle.graphics.beginFill(0xffff00, 0.7);
-        circle.graphics.drawCircle(100, 200, 100);
-        circle.graphics.endFill();
-        this.addChild(circle);
+        this. circle = new egret.Shape();
+        this.circle.graphics.lineStyle(0, 0xffffff);
+        this.circle.graphics.beginFill(0x00ff00, 0.7);
+        this.circle.graphics.drawCircle(200, 200, 180);
+        this.circle.graphics.endFill();
+        this.addChild(this.circle);
+        this.text = new egret.TextField();
+
+        this.addChild(this.text);
+        this.text.width = 400;
+        this.text.height = 400;
+        this.text.text = "Hello World";
+        this.stage.frameRate = 60;
+        this.addEventListener(egret.Event.ENTER_FRAME, move, this);
+        var x: number = 0;
+        var y: number = 0;
+        function move(evt: egret.Event) {
+            if (this.text.x > 480) {
+                this.text.x = 0;
+                this.text.y = 0;
+                x = 0;
+                y = 0;
+            }
+            this.text.x = x;
+            this.text.y = y;
+            this.circle.x=x;
+            x++;
+            y++;
+        }
     }
 
 }
