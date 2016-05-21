@@ -117,22 +117,35 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private text: egret.TextField;
+    private text2: egret.TextField;
     private circle: egret.Shape;
     private createGameScene(): void {
         this. circle = new egret.Shape();
         this.circle.graphics.lineStyle(0, 0xffffff);
-        this.circle.graphics.beginFill(0x00ff00, 0.7);
+        this.circle.graphics.beginFill(0x123456, 0.7);
         this.circle.graphics.drawCircle(200, 200, 180);
         this.circle.graphics.endFill();
         this.addChild(this.circle);
         this.text = new egret.TextField();
+        this.text2 = new egret.TextField();
 
         this.addChild(this.text);
+        this.addChild(this.text2);
         this.text.width = 400;
         this.text.height = 400;
         this.text.text = "Hello World";
         this.stage.frameRate = 60;
         this.addEventListener(egret.Event.ENTER_FRAME, move, this);
+        this.text.touchEnabled=true;
+        this.text.addEventListener(egret.TouchEvent.TOUCH_TAP,touchEventHandler,this);
+        var count:number =1;
+        function touchEventHandler(evt:egret.TouchEvent) :void {
+            let text:egret.TextField = evt.currentTarget;
+            let colors=[0xff0000,0x00ff00,0x0000ff,0x334567,0x765432]
+            text.textColor =colors[ Math.random() *5 |0];
+            this.text2.text=count;
+            count++;
+        }
         var x: number = 0;
         var y: number = 0;
         function move(evt: egret.Event) {
