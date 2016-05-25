@@ -40,6 +40,9 @@ class Main extends egret.DisplayObjectContainer {
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
+    private drawGrid(){
+        
+    }
     private onAddToStage(event: egret.Event) {
         //设置加载进度界面
         //Config to load process interface
@@ -119,13 +122,52 @@ class Main extends egret.DisplayObjectContainer {
     private text: egret.TextField;
     private text2: egret.TextField;
     private circle: egret.Shape;
+    private rect: egret.Shape;
+    private arc: egret.Shape;
+    private line: egret.Shape;
+    private linecurve: egret.Shape;
     private createGameScene(): void {
-        this. circle = new egret.Shape();
-        this.circle.graphics.lineStyle(0, 0xffffff);
-        this.circle.graphics.beginFill(0x123456, 0.7);
-        this.circle.graphics.drawCircle(200, 200, 180);
+        this.circle = new egret.Shape();
+        this.line = new egret.Shape();
+        this.linecurve = new egret.Shape();
+        this.arc = new egret.Shape();
+        this.rect = new egret.Shape();
+        this.circle.graphics.lineStyle(2, 0xff00aa);
+        this.circle.graphics.beginFill(0xff00aa, 1);
+        this.circle.graphics.drawCircle(0, 180, 80);
         this.circle.graphics.endFill();
+        this.line.graphics.lineStyle(2, 0x00af02);
+        this.line.graphics.moveTo(0, 100);
+        this.line.graphics.lineTo(200, 100);
+        this.line.graphics.lineTo(200, 120);
+        this.line.graphics.lineTo(150, 120);
+        this.line.graphics.lineTo(150, 200);
+        this.line.graphics.endFill();
+        this.linecurve.graphics.lineStyle(2, 0x00af02);
+        this.linecurve.graphics.moveTo(50, 50);
+        this.linecurve.graphics.curveTo(100, 100, 200, 50);
+        this.linecurve.graphics.endFill();
+        this.arc.graphics.beginFill(0x002288, 0.8);
+        this.arc.graphics.drawArc(200, 200, 100, 0, Math.PI, false);
+        this.arc.graphics.endFill();
+        this.rect.graphics.beginFill(0x0000ff);
+        this.rect.graphics.drawRect(0, 0, 50, 50);
+        this.rect.graphics.endFill();
+        this.rect.graphics.beginFill(0x00ff00);
+        this.rect.graphics.drawRect(50, 50, 50, 50);
+        this.rect.graphics.endFill();
+        this.rect.graphics.beginFill(0xff0000);
+        this.rect.graphics.drawRect(0, 50, 50, 50);
+        this.rect.graphics.endFill();
+        this.rect.graphics.beginFill(0xff00ff);
+        this.rect.graphics.drawRect(50,0,50,50);
+        this.rect.graphics.endFill();
+
         this.addChild(this.circle);
+        this.addChild(this.line);
+        this.addChild(this.linecurve);
+        this.addChild(this.arc);
+        this.addChild(this.rect);
         this.text = new egret.TextField();
         this.text2 = new egret.TextField();
 
@@ -136,14 +178,16 @@ class Main extends egret.DisplayObjectContainer {
         this.text.text = "Hello World";
         this.stage.frameRate = 60;
         this.addEventListener(egret.Event.ENTER_FRAME, move, this);
-        this.text.touchEnabled=true;
-        this.text.addEventListener(egret.TouchEvent.TOUCH_TAP,touchEventHandler,this);
-        var count:number =1;
-        function touchEventHandler(evt:egret.TouchEvent) :void {
-            let text:egret.TextField = evt.currentTarget;
-            let colors=[0xff0000,0x00ff00,0x0000ff,0x334567,0x765432]
-            text.textColor =colors[ Math.random() *5 |0];
-            this.text2.text=count;
+        this.text.touchEnabled = true;
+        this.text.addEventListener(egret.TouchEvent.TOUCH_TAP, touchEventHandler, this);
+        var _myGrid : GridSprite = new GridSprite();
+        this.addChild(_myGrid);
+        var count: number = 1;
+        function touchEventHandler(evt: egret.TouchEvent): void {
+            let text: egret.TextField = evt.currentTarget;
+            let colors = [0xff0000, 0x00ff00, 0x0000ff, 0x334567, 0x765432]
+            text.textColor = colors[Math.random() * 5 | 0];
+            this.text2.text = count;
             count++;
         }
         var x: number = 0;
@@ -157,10 +201,9 @@ class Main extends egret.DisplayObjectContainer {
             }
             this.text.x = x;
             this.text.y = y;
-            this.circle.x=x;
+            this.circle.x = x;
             x++;
             y++;
         }
     }
-
 }
