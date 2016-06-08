@@ -25,6 +25,9 @@ class GridSprite extends egret.Sprite{
             this.x=50+Math.cos(ang*Math.PI/180)*r;
             this.y=50+Math.sin(ang*Math.PI/180)*r;
             ang++;
+            if(this.hitTestPoint(50,100,true)){ //碰撞檢查
+                ang-=50;
+            }
         },this)
     }
 }

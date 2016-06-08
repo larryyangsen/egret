@@ -40,8 +40,8 @@ class Main extends egret.DisplayObjectContainer {
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
-    private drawGrid(){
-        
+    private drawGrid() {
+
     }
     private onAddToStage(event: egret.Event) {
         //设置加载进度界面
@@ -160,7 +160,7 @@ class Main extends egret.DisplayObjectContainer {
         this.rect.graphics.drawRect(0, 50, 50, 50);
         this.rect.graphics.endFill();
         this.rect.graphics.beginFill(0xff00ff);
-        this.rect.graphics.drawRect(50,0,50,50);
+        this.rect.graphics.drawRect(50, 0, 50, 50);
         this.rect.graphics.endFill();
 
         this.addChild(this.circle);
@@ -180,11 +180,11 @@ class Main extends egret.DisplayObjectContainer {
         this.addEventListener(egret.Event.ENTER_FRAME, move, this);
         this.text.touchEnabled = true;
         this.text.addEventListener(egret.TouchEvent.TOUCH_TAP, touchEventHandler, this);
-        var _myGrid : GridSprite = new GridSprite(150);
+        var _myGrid: GridSprite = new GridSprite(150);
         this.addChild(_myGrid);
-        var  spr:egret.Sprite = new egret.Sprite();
+        var spr: egret.Sprite = new egret.Sprite();
         spr.graphics.beginFill(0xff00ff);
-        spr.graphics.drawRect(200,200,20,20);
+        spr.graphics.drawRect(200, 200, 20, 20);
         spr.graphics.endFill();
         _myGrid.addChild(spr);
         var count: number = 1;
@@ -198,12 +198,18 @@ class Main extends egret.DisplayObjectContainer {
         }
         var x: number = 0;
         var y: number = 0;
-        function move(evt: egret.Event) {
+
+        function move(evt: egret.Event): void {
             if (this.text.x > 480) {
                 this.text.x = 0;
                 this.text.y = 0;
                 x = 0;
                 y = 0;
+            }
+            if (this.text.hitTestPoint(400, 300)) {
+                this.text.text = 'been hited';
+            } else {
+                this.text.text = "Hello World";
             }
             this.text.x = x;
             this.text.y = y;
