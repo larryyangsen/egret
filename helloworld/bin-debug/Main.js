@@ -33,6 +33,8 @@ var Main = (function (_super) {
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
     var d = __define,c=Main,p=c.prototype;
+    p.drawGrid = function () {
+    };
     p.onAddToStage = function (event) {
         //设置加载进度界面
         //Config to load process interface
@@ -96,20 +98,89 @@ var Main = (function (_super) {
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     };
-    /**
-     * 创建游戏场景
-     * Create a game scene
-     */
     p.createGameScene = function () {
-        var circle = new egret.Shape;
-        circle.graphics.lineStyle(0, 0xffffff);
-        circle.graphics.beginFill(0x00ff00, 0.7);
-        circle.graphics.drawCircle(200, 200, 100);
-        circle.graphics.lineStyle(0, 0x00ffff);
-        circle.graphics.beginFill(0xffff00, 0.7);
-        circle.graphics.drawCircle(100, 200, 100);
-        circle.graphics.endFill();
-        this.addChild(circle);
+        this.circle = new egret.Shape();
+        this.line = new egret.Shape();
+        this.linecurve = new egret.Shape();
+        this.arc = new egret.Shape();
+        this.rect = new egret.Shape();
+        this.circle.graphics.lineStyle(2, 0xff00aa);
+        this.circle.graphics.beginFill(0xff00aa, 1);
+        this.circle.graphics.drawCircle(0, 180, 80);
+        this.circle.graphics.endFill();
+        this.line.graphics.lineStyle(2, 0x00af02);
+        this.line.graphics.moveTo(0, 100);
+        this.line.graphics.lineTo(200, 100);
+        this.line.graphics.lineTo(200, 120);
+        this.line.graphics.lineTo(150, 120);
+        this.line.graphics.lineTo(150, 200);
+        this.line.graphics.endFill();
+        this.linecurve.graphics.lineStyle(2, 0x00af02);
+        this.linecurve.graphics.moveTo(50, 50);
+        this.linecurve.graphics.curveTo(100, 100, 200, 50);
+        this.linecurve.graphics.endFill();
+        this.arc.graphics.beginFill(0x002288, 0.8);
+        this.arc.graphics.drawArc(200, 200, 100, 0, Math.PI, false);
+        this.arc.graphics.endFill();
+        this.rect.graphics.beginFill(0x0000ff);
+        this.rect.graphics.drawRect(0, 0, 50, 50);
+        this.rect.graphics.endFill();
+        this.rect.graphics.beginFill(0x00ff00);
+        this.rect.graphics.drawRect(50, 50, 50, 50);
+        this.rect.graphics.endFill();
+        this.rect.graphics.beginFill(0xff0000);
+        this.rect.graphics.drawRect(0, 50, 50, 50);
+        this.rect.graphics.endFill();
+        this.rect.graphics.beginFill(0xff00ff);
+        this.rect.graphics.drawRect(50, 0, 50, 50);
+        this.rect.graphics.endFill();
+        this.addChild(this.circle);
+        this.addChild(this.line);
+        this.addChild(this.linecurve);
+        this.addChild(this.arc);
+        this.addChild(this.rect);
+        this.text = new egret.TextField();
+        this.text2 = new egret.TextField();
+        this.addChild(this.text);
+        this.addChild(this.text2);
+        this.text.width = 400;
+        this.text.height = 400;
+        this.text.text = "Hello World";
+        this.stage.frameRate = 60;
+        this.addEventListener(egret.Event.ENTER_FRAME, move, this);
+        this.text.touchEnabled = true;
+        this.text.addEventListener(egret.TouchEvent.TOUCH_TAP, touchEventHandler, this);
+        var _myGrid = new GridSprite(150);
+        this.addChild(_myGrid);
+        var spr = new egret.Sprite();
+        spr.graphics.beginFill(0xff00ff);
+        spr.graphics.drawRect(200, 200, 20, 20);
+        spr.graphics.endFill();
+        _myGrid.addChild(spr);
+        var count = 1;
+        function touchEventHandler(evt) {
+            var text = evt.currentTarget;
+            var colors = [0xff0000, 0x00ff00, 0x0000ff, 0x334567, 0x765432];
+            text.textColor = colors[Math.random() * 5 | 0];
+            this.text2.text = count;
+            this.addChild(spr);
+            count++;
+        }
+        var x = 0;
+        var y = 0;
+        function move(evt) {
+            if (this.text.x > 480) {
+                this.text.x = 0;
+                this.text.y = 0;
+                x = 0;
+                y = 0;
+            }
+            this.text.x = x;
+            this.text.y = y;
+            this.circle.x = x;
+            x++;
+            y++;
+        }
     };
     return Main;
 }(egret.DisplayObjectContainer));

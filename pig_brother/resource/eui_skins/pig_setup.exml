@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="pig_setup" width="400" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:TextInput id="ti_playname" x="189" y="63" width="195" />
+	<e:Label text="用戶名稱" x="53" y="69" width="128" />
+	<e:Label text="伺服器列表" x="25" y="125" width="167" height="60" />
+	<e:List id="li_server" width="200" height="41" x="189" y="125">
+		<e:ArrayCollection>
+			<e:Array>
+				<e:Object label="192.168.31.5" />
+				<e:Object label="192.168.31.8" />
+				<e:Object label="echo.websocket.org:80" />
+		    </e:Array>
+		</e:ArrayCollection>
+	</e:List>
+	<e:Button id="btn_login" label="確認" x="290" y="232" />
+	<e:Label id="msg_setup" text="設置提示訊息" x="24" y="240" /> </e:Skin>

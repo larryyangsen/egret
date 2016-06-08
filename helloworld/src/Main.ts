@@ -180,14 +180,20 @@ class Main extends egret.DisplayObjectContainer {
         this.addEventListener(egret.Event.ENTER_FRAME, move, this);
         this.text.touchEnabled = true;
         this.text.addEventListener(egret.TouchEvent.TOUCH_TAP, touchEventHandler, this);
-        var _myGrid : GridSprite = new GridSprite();
+        var _myGrid : GridSprite = new GridSprite(150);
         this.addChild(_myGrid);
+        var  spr:egret.Sprite = new egret.Sprite();
+        spr.graphics.beginFill(0xff00ff);
+        spr.graphics.drawRect(200,200,20,20);
+        spr.graphics.endFill();
+        _myGrid.addChild(spr);
         var count: number = 1;
         function touchEventHandler(evt: egret.TouchEvent): void {
             let text: egret.TextField = evt.currentTarget;
             let colors = [0xff0000, 0x00ff00, 0x0000ff, 0x334567, 0x765432]
             text.textColor = colors[Math.random() * 5 | 0];
             this.text2.text = count;
+            this.addChild(spr);
             count++;
         }
         var x: number = 0;
